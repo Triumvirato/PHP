@@ -1,0 +1,60 @@
+{
+   "bugs" : [
+      {
+         "alias" : null,
+         "assigned_to" : "mcafee@gmail.com",
+         "assigned_to_detail" : {
+            "email" : "mcafee@gmail.com",
+            "id" : 1672,
+            "name" : "mcafee@gmail.com",
+            "real_name" : "Chris McAfee"
+         },
+         "blocks" : [],
+         "cc" : [],
+         "cc_detail" : [],
+         "cf_fx_iteration" : "---",
+         "cf_fx_points" : "---",
+         "cf_last_resolved" : "1998-10-07T08:52:49Z",
+         "cf_qa_whiteboard" : "",
+         "cf_user_story" : "",
+         "classification" : "Graveyard",
+         "component" : "XFE",
+         "creation_time" : "1998-08-14T23:19:25Z",
+         "creator" : "jplissd@atlantic-line.fr",
+         "creator_detail" : {
+            "email" : "jplissd@atlantic-line.fr",
+            "id" : 3719,
+            "name" : "jplissd@atlantic-line.fr",
+            "real_name" : "Julien PLISSONNEAU DUQUENE"
+         },
+         "depends_on" : [],
+         "dupe_of" : null,
+         "flags" : [],
+         "groups" : [],
+         "id" : 529,
+         "is_cc_accessible" : true,
+         "is_confirmed" : true,
+         "is_creator_accessible" : true,
+         "is_open" : false,
+         "keywords" : [],
+         "last_change_time" : "1999-04-21T18:23:14Z",
+         "mentors" : [],
+         "mentors_detail" : [],
+         "op_sys" : "Linux",
+         "platform" : "x86",
+         "priority" : "P3",
+         "product" : "MozillaClassic",
+         "qa_contact" : "",
+         "resolution" : "WORKSFORME",
+         "see_also" : [],
+         "severity" : "critical",
+         "status" : "VERIFIED",
+         "summary" : "mozilla-export crashes on startup",
+         "target_milestone" : "---",
+         "url" : "",
+         "version" : "1998-07-28",
+         "votes" : 0,
+         "whiteboard" : ""
+      }
+   ]
+}
