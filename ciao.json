@@ -2,59 +2,136 @@
    "bugs" : [
       {
          "alias" : null,
-         "assigned_to" : "mcafee@gmail.com",
+         "assigned_to" : "nobody@mozilla.org",
          "assigned_to_detail" : {
-            "email" : "mcafee@gmail.com",
-            "id" : 1672,
-            "name" : "mcafee@gmail.com",
-            "real_name" : "Chris McAfee"
+            "email" : "nobody@mozilla.org",
+            "id" : 1,
+            "name" : "nobody@mozilla.org",
+            "real_name" : "Nobody; OK to take it and work on it"
          },
          "blocks" : [],
-         "cc" : [],
-         "cc_detail" : [],
+         "cc" : [
+            "hjhoehlc@hotmail.com",
+            "jackkeeley098@gmail.com",
+            "khojames24@gmail.com",
+            "sbadyals@gmail.com",
+            "sullythomas@icloud.com",
+            "vanthuane10cn_ptit92@hotmail.com",
+            "yoloworkhard7@gmail.com",
+            "zee@technocore.ru"
+         ],
+         "cc_detail" : [
+            {
+               "email" : "hjhoehlc@hotmail.com",
+               "id" : 494543,
+               "name" : "hjhoehlc@hotmail.com",
+               "real_name" : "sldeoks"
+            },
+            {
+               "email" : "jackkeeley098@gmail.com",
+               "id" : 531693,
+               "name" : "jackkeeley098@gmail.com",
+               "real_name" : ""
+            },
+            {
+               "email" : "khojames24@gmail.com",
+               "id" : 533434,
+               "name" : "khojames24@gmail.com",
+               "real_name" : ""
+            },
+            {
+               "email" : "sbadyals@gmail.com",
+               "id" : 500677,
+               "name" : "sbadyals@gmail.com",
+               "real_name" : ""
+            },
+            {
+               "email" : "sullythomas@icloud.com",
+               "id" : 545566,
+               "name" : "sullythomas@icloud.com",
+               "real_name" : ""
+            },
+            {
+               "email" : "vanthuane10cn_ptit92@hotmail.com",
+               "id" : 508227,
+               "name" : "vanthuane10cn_ptit92@hotmail.com",
+               "real_name" : ""
+            },
+            {
+               "email" : "yoloworkhard7@gmail.com",
+               "id" : 515252,
+               "name" : "yoloworkhard7@gmail.com",
+               "real_name" : "Roshan"
+            },
+            {
+               "email" : "zee@technocore.ru",
+               "id" : 299536,
+               "name" : "zee@technocore.ru",
+               "real_name" : "Alexey Ermakov"
+            }
+         ],
+         "cf_crash_signature" : "",
          "cf_fx_iteration" : "---",
          "cf_fx_points" : "---",
-         "cf_last_resolved" : "1998-10-07T08:52:49Z",
+         "cf_last_resolved" : null,
          "cf_qa_whiteboard" : "",
+         "cf_rank" : null,
+         "cf_status_firefox40" : "---",
+         "cf_status_firefox41" : "---",
+         "cf_status_firefox42" : "---",
+         "cf_status_firefox43" : "---",
+         "cf_status_firefox_esr31" : "---",
+         "cf_status_firefox_esr38" : "---",
+         "cf_tracking_e10s" : "---",
+         "cf_tracking_firefox40" : "---",
+         "cf_tracking_firefox41" : "---",
+         "cf_tracking_firefox42" : "---",
+         "cf_tracking_firefox43" : "---",
+         "cf_tracking_firefox_esr31" : "---",
+         "cf_tracking_firefox_esr38" : "---",
+         "cf_tracking_firefox_relnote" : "---",
+         "cf_tracking_p11" : "---",
+         "cf_tracking_win" : "---",
          "cf_user_story" : "",
-         "classification" : "Graveyard",
-         "component" : "XFE",
-         "creation_time" : "1998-08-14T23:19:25Z",
-         "creator" : "jplissd@atlantic-line.fr",
+         "classification" : "Client Software",
+         "component" : "Bookmarks & History",
+         "creation_time" : "2008-02-04T16:57:14Z",
+         "creator" : "zee@technocore.ru",
          "creator_detail" : {
-            "email" : "jplissd@atlantic-line.fr",
-            "id" : 3719,
-            "name" : "jplissd@atlantic-line.fr",
-            "real_name" : "Julien PLISSONNEAU DUQUENE"
+            "email" : "zee@technocore.ru",
+            "id" : 299536,
+            "name" : "zee@technocore.ru",
+            "real_name" : "Alexey Ermakov"
          },
          "depends_on" : [],
          "dupe_of" : null,
          "flags" : [],
          "groups" : [],
-         "id" : 529,
+         "id" : 415555,
          "is_cc_accessible" : true,
-         "is_confirmed" : true,
+         "is_confirmed" : false,
          "is_creator_accessible" : true,
-         "is_open" : false,
+         "is_open" : true,
          "keywords" : [],
-         "last_change_time" : "1999-04-21T18:23:14Z",
+         "last_change_time" : "2015-08-01T18:39:34Z",
          "mentors" : [],
          "mentors_detail" : [],
-         "op_sys" : "Linux",
-         "platform" : "x86",
-         "priority" : "P3",
-         "product" : "MozillaClassic",
+         "op_sys" : "All",
+         "platform" : "All",
+         "priority" : "--",
+         "product" : "Firefox",
          "qa_contact" : "",
-         "resolution" : "WORKSFORME",
+         "resolution" : "",
          "see_also" : [],
-         "severity" : "critical",
-         "status" : "VERIFIED",
-         "summary" : "mozilla-export crashes on startup",
+         "severity" : "enhancement",
+         "status" : "UNCONFIRMED",
+         "summary" : "Feature request: option to AND queries submitted to nsINavHistoryService.executeQueries()",
          "target_milestone" : "---",
          "url" : "",
-         "version" : "1998-07-28",
+         "version" : "unspecified",
          "votes" : 0,
          "whiteboard" : ""
       }
-   ]
+   ],
+   "faults" : []
 }
