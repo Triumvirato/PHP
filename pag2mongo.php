@@ -168,6 +168,11 @@ $json = json_decode($content, true);
 	*/
 	
 	
+	$collection->insert($json);
+   
+	
+	
+	/*
 	//inserisco un documento nella collection appena selezionata
    $document = array( 
       "id" => $id, 
@@ -188,6 +193,8 @@ $json = json_decode($content, true);
    );
    $collection->insert($document);
    echo "<br>Document inserted successfully";
+   
+   */
     
 }
 
