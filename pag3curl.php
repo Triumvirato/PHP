@@ -18,7 +18,7 @@
    
    
 
-$component= urlencode('Build Config');
+$component= urlencode('Bookmarks & History');
 
 store_db('https://bugzilla.mozilla.org/rest/bug?include_fields=id,summary,status&component='.$component.'&product=Firefox&resolution=---', $con, $collection);
 
@@ -28,9 +28,24 @@ function store_db($url, $con, $collection)
 {
 
 
-$output = acquisisci($url); //richiama la curl
+$curl_options = array(
+                    CURLOPT_URL => $url,
+                    CURLOPT_HEADER => 0,
+                    CURLOPT_RETURNTRANSFER => TRUE,
+                    CURLOPT_TIMEOUT => 0,
+                    CURLOPT_SSL_VERIFYPEER => 0,
+                    CURLOPT_FOLLOWLOCATION => TRUE,
+                    CURLOPT_ENCODING => 'gzip,deflate',
+            );
 
-$arr = json_decode($output,true);
+            $ch = curl_init();
+            curl_setopt_array( $ch, $curl_options );
+            $output = curl_exec( $ch );
+            curl_close($ch);
+
+
+$arr = json_decode($output, true);
+
 
 foreach($arr['bugs'] as $val)
 {
@@ -62,50 +77,9 @@ if(!function_exists("curl_init")) die("cURL extension is not installed");
             curl_setopt_array( $ch, $curl_options );
             $output = curl_exec( $ch );
             curl_close($ch);
-
-			return $output;
+			
+			return json_decode($output, true);
 }
-
- 
- 
- 
-
-/* Prende l'oggetto json e lo salva in un file .json
-
-$outfile= 'result.json';
-$url='https://bugzilla.mozilla.org/rest/bug?id=415555';
-$json = file_get_contents($url);
-if($json) { 
-    if(file_put_contents($outfile, $json, FILE_APPEND)) {
-      echo "Saved JSON fetched from “{$url}” as “{$outfile}”.";
-    }
-    else {
-      echo "Unable to save JSON to “{$outfile}”.";
-    }
-}
-else {
-   echo "Unable to fetch JSON from “{$url}”.";
-}
-*/
-
- 
- 
- 
-
-
- 
-
-/*
-foreach($json['bugs'] as $item) {
-    
-    
-    
-    print $item['classification'];
-
-    print '<br>';
-    
-}
-*/
 
 
 //otteniamo le variabili necessarie formulando 3 API dei 3 Url
@@ -122,26 +96,22 @@ getVar($url, $url_comment, $url_changes, $id, $con, $collection);
 
 function getComments($url)
 {
-$content = acquisisci($url); //richiama la curl
-$json_c = json_decode($content, true);
+$json_c = acquisisci($url); //richiama la curl
     
     return $json_c;
 }
 
 function getChanges($url)
 {
-$content = acquisisci($url); //richiama la curl
-$json_ch = json_decode($content, true);
-    
+$json_ch = acquisisci($url); //richiama la curl
+
     return $json_ch;
 }
 
 function getVar($url, $url_comment, $url_changes, $id, $con, $collection)
 {
-$content = acquisisci($url); //richiama la curl
-$json = json_decode($content, true);    
-    
-     
+$json = acquisisci($url); //richiama la curl
+
     $creator_email=$json['bugs'][0]['creator_detail']['email'];
      
     $component= $json['bugs'][0]['component'];
