@@ -1,6 +1,5 @@
 <?php
 
-namespace finale;
 
 require_once __DIR__ . '/funzioni.php';
 
@@ -31,6 +30,9 @@ foreach (getBugsFromCSV($csv) as $bug_number => $bug_title) {
     }
 	
 	$conta++;
+    //if ($conta == 1) break;
+  
+
 	
 
 	

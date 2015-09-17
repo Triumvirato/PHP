@@ -1,5 +1,4 @@
 <?php
-namespace finale;
 
 /*
  * getBugsFromCSV()
@@ -86,22 +85,21 @@ function connectToMongo()
 
 function getBugs($id,$con)
 {
-    $url="https://bugs.documentfoundation.org/show_bug.cgi?ctype=xml&id='.$id.'";
+    $url='https://bugs.documentfoundation.org/show_bug.cgi?ctype=xml&id='.$id.'';
 
-// stiamo facendo il parse del file xml
-		$fileContents= file_get_contents($url);
+        $fileContents= file_get_contents($url);
 
 		$fileContents = str_replace(array("\n", "\r", "\t"), '', $fileContents);
 
 		$fileContents = trim(str_replace('"', "'", $fileContents));
 		
-	    //$fileContents = str_replace('\/', '/', $fileContents); //bob fix
-
-		//echo $fileContents;
 
 		$simpleXml = simplexml_load_string($fileContents);
 
-		$json = json_encode($simpleXml, JSON_PRETTY_PRINT);
+		$json = json_encode($simpleXml);//JSON_PRETTY_PRINT
+        $json = json_decode($json);
+    
+    
     
 // memorizziamo nel database
     

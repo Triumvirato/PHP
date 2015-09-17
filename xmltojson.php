@@ -28,7 +28,7 @@ class XmlToJson {
 $xmltojson = new XmlToJson();
 
 
-$js = $xmltojson->Parse('https://bugs.documentfoundation.org/show_bug.cgi');
+$js = $xmltojson->Parse('https://bugs.documentfoundation.org/show_bug.cgi?ctype=xml&id=55566');
 
 
 header('Content-Type: application/json');
