@@ -46,16 +46,24 @@ function setXML($id)
         
 }
 
-$xml=setXML("68983");
+$xml=setXML("92360");
 
 $xml=getFromRpc("https://bugs.documentfoundation.org/xmlrpc.cgi", $xml);
         
         
-    $simpleXml = simplexml_load_string($xml);
-    $json = json_encode($simpleXml);//JSON_PRETTY_PRINT
-        
+    //$simpleXml = simplexml_load_string($xml);
+    $xml = new SimpleXMLElement($xml);
 
-header("Content-type: text/json");
-echo $json;
+//percorso per arrivare ai datatime
+//'params/param/value/struct/member/value/array/data/value/struct/member/value/array/data/value/struct/member/value/dateTime.iso8601'
+
+/* Search for <a><b><c> */
+$result = $xml->xpath('params/param/value/struct/member/value/array/data/value/struct/member/value/array/data/value/struct/member/value/array/data/value/struct/member/value/string');
+
+while(list( , $node) = each($result)) {
+    echo $node,"<br>";
+}
+//header("Content-type: text/json");
+//echo $json;
 
 ?>
