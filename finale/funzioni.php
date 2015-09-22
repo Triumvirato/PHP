@@ -86,6 +86,63 @@ function connectToMongo()
 function getBugs($id,$con)
 {
     $url='https://bugs.documentfoundation.org/show_bug.cgi?ctype=xml&id='.$id.'';
+    
+    ///////////////////////////////////////////////////////////////////
+    // Include the library to use it.
+include_once('simple_html_dom.php');
+
+// Get the HTML from the Yahoo! website.
+$html = file_get_html('https://bugs.documentfoundation.org/show_activity.cgi?id='.$id.'');
+
+
+echo "<a>-------------------OFFICIAL------------------------<a/><br/>";
+    
+$es = $html->find('table tr td');
+
+$arrlength = count($es);
+for($x = 0; $x < $arrlength; $x++) 
+{
+    
+    if(preg_match('/UTC/',$es[$x]) || preg_match('/PDT/',$es[$x]) || preg_match('/DST/',$es[$x]) || preg_match('/PST/',$es[$x]) || preg_match('/EST/',$es[$x]))
+        {
+            $ladata= $es[$x];
+        }
+        if(preg_match('/Status/',$es[$x]))
+        {
+
+            if(preg_match('/RESOLVED/',$es[$x+2]))
+            {
+                $stato= $es[$x+2];
+                $data_def=$ladata;
+            }
+                
+          }  
+    
+    if(preg_match('/Priority/',$es[$x]))
+        {
+
+            if(!isset($priorita))
+            {
+                $priorita= $es[$x+1];
+            }
+                
+          }
+    
+    if(preg_match('/Severity/',$es[$x]))
+        {
+
+            if(!isset($gravita))
+            {
+                $gravita= $es[$x+1];
+            }
+                
+          }
+    
+     
+    //echo $es[$x];
+    //echo "<br>";
+}
+    ////////////////////////////////////////////////////////
 
         $fileContents= file_get_contents($url);
 
@@ -99,13 +156,19 @@ function getBugs($id,$con)
         unset($simpleXml->bug->attachment);
     
 
-		$json = json_encode($simpleXml);//JSON_PRETTY_PRINT
-        
+		$json = json_encode($simpleXml, JSON_PRETTY_PRINT);//JSON_PRETTY_PRINT
     
-    $json = json_decode($json);
+        $temp = json_decode($json);
+        $temp['bugs'][0]['bau'] = $stato;
+        $json = json_encode($temp);
+    
+    header("Content-type: text/json");
+    print $json;
+    
+    //$json = json_decode($json);
     
     
-    
+/*    
 // memorizziamo nel database
     
         // select a database
@@ -122,10 +185,10 @@ function getBugs($id,$con)
     
             $collection->insert($json);
            
-        
+*/        
     
 }
-
+/* Da eliminare 
 function getFromRpc($url, $xml)
 {
 
@@ -172,7 +235,7 @@ function setXML($id)
 </param> </params> </methodCall>';
         
 }
-
+*/
 
 
 ?>
