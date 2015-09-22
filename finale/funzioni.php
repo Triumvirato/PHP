@@ -75,7 +75,9 @@ function connectToMongo()
 {
     // connect to mongodb
    $con = new MongoClient( "mongodb://tesi:tesi@ds059712.mongolab.com:59712/tesi_uniba" );
-   echo "Connection to database successfully";
+   
+   //Debug
+   //echo "Connection to database successfully";
     
     return $con;
    
@@ -86,64 +88,65 @@ function connectToMongo()
 function getBugs($id,$con)
 {
     $url='https://bugs.documentfoundation.org/show_bug.cgi?ctype=xml&id='.$id.'';
-    
-    ///////////////////////////////////////////////////////////////////
-    // Include the library to use it.
+ 
+// Include the library to use it.
 include_once('simple_html_dom.php');
 
-// Get the HTML from the Yahoo! website.
+// Start History Scraping 
 $html = file_get_html('https://bugs.documentfoundation.org/show_activity.cgi?id='.$id.'');
 
-
-echo "<a>-------------------OFFICIAL------------------------<a/><br/>";
-    
+//Search the table (muhahahahah)    
 $es = $html->find('table tr td');
 
 $arrlength = count($es);
+
 for($x = 0; $x < $arrlength; $x++) 
 {
+    if(preg_match('/UTC/',$es[$x]) || preg_match('/PDT/',$es[$x]) || 
+	preg_match('/DST/',$es[$x]) || preg_match('/PST/',$es[$x]) || 
+	preg_match('/EST/',$es[$x])){
+	
+		$ladata= $es[$x];
+    }
+	
+    if(preg_match('/Status/',$es[$x])){
+		
+		if(preg_match('/RESOLVED/',$es[$x+2])){
+		
+			$stato= $es[$x+2];
+			$data_def=$ladata;
+        }       
+    }  
     
-    if(preg_match('/UTC/',$es[$x]) || preg_match('/PDT/',$es[$x]) || preg_match('/DST/',$es[$x]) || preg_match('/PST/',$es[$x]) || preg_match('/EST/',$es[$x]))
-        {
-            $ladata= $es[$x];
-        }
-        if(preg_match('/Status/',$es[$x]))
-        {
-
-            if(preg_match('/RESOLVED/',$es[$x+2]))
-            {
-                $stato= $es[$x+2];
-                $data_def=$ladata;
+    if(preg_match('/Priority/',$es[$x])){
+		
+		if(!isset($priorita)){
+			$priorita= $es[$x+1];
             }
-                
-          }  
-    
-    if(preg_match('/Priority/',$es[$x]))
-        {
-
-            if(!isset($priorita))
-            {
-                $priorita= $es[$x+1];
-            }
-                
-          }
+	}
     
     if(preg_match('/Severity/',$es[$x]))
-        {
+	{
+		if(!isset($gravita)){
+            $gravita= $es[$x+1];
+        }
+    }
 
-            if(!isset($gravita))
-            {
-                $gravita= $es[$x+1];
-            }
-                
-          }
-    
-     
+	
+	//Echo TEST
     //echo $es[$x];
-    //echo "<br>";
 }
-    ////////////////////////////////////////////////////////
 
+	//Echo TEST
+	echo '<p>BUG id: '.$id.'</p>';
+	echo '<p>Stato: '.$stato.'</p>';
+	echo '<p>Data: '.$data_def.'</p>';
+	echo '<p>Priorita: '.$priorita.'</p>';
+	echo '<p>Gravita: '.$gravita.'</p>';
+ 
+ 
+//-------------------------------------------------------------------------------
+/*
         $fileContents= file_get_contents($url);
 
 		$fileContents = str_replace(array("\n", "\r", "\t"), '', $fileContents);
@@ -156,15 +159,15 @@ for($x = 0; $x < $arrlength; $x++)
         unset($simpleXml->bug->attachment);
     
 
-		$json = json_encode($simpleXml, JSON_PRETTY_PRINT);//JSON_PRETTY_PRINT
+		$json = json_encode($simpleXml); //JSON_PRETTY_PRINT
     
         $temp = json_decode($json);
         $temp['bugs'][0]['bau'] = $stato;
         $json = json_encode($temp);
     
-    header("Content-type: text/json");
-    print $json;
-    
+		header("Content-type: text/json");
+		print $json;
+ */   
     //$json = json_decode($json);
     
     
@@ -188,54 +191,6 @@ for($x = 0; $x < $arrlength; $x++)
 */        
     
 }
-/* Da eliminare 
-function getFromRpc($url, $xml)
-{
-
-  $ch = curl_init();
-  curl_setopt( $ch, CURLOPT_URL, $url );
-  curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-  curl_setopt( $ch, CURLOPT_POST, true );
-  curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type: text/xml'));
-  curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-  curl_setopt( $ch, CURLOPT_POSTFIELDS, $xml );
-
-  $result = curl_exec($ch);
-
-  if(!curl_exec($ch)){
-    die('Error: "' . curl_error($ch) . '" - Code: ' . curl_errno($ch));
-}
-
-   //Stampa i risultati in XML
-   //header("Content-type: text/xml");
-   //print $result;
-
-  curl_close($ch);
-    
-    return $result;
-}
-
-function setXML($id)
-{
-    return '<?xml version=\'1.0\' encoding=\'UTF-8\'?><methodCall><methodName>Bug.history</methodName> <params> <param>
-    <struct>      
-        <member>
-            <name>ids</name>
-            <value>
-                <array>
-                    <data>
-                        <value>
-                            <int>'.$id.'</int>
-                        </value>
-                    </data>
-                </array>
-            </value>
-        </member>   
-    </struct>
-</param> </params> </methodCall>';
-        
-}
-*/
 
 
 ?>
