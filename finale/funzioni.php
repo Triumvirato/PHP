@@ -87,7 +87,6 @@ function connectToMongo()
 
 function getBugs($id,$con)
 {
-    $url='https://bugs.documentfoundation.org/show_bug.cgi?ctype=xml&id='.$id.'';
  
 // Include the library to use it.
 include_once('simple_html_dom.php');
@@ -137,41 +136,49 @@ for($x = 0; $x < $arrlength; $x++)
     //echo $es[$x];
 }
 
-	//Echo TEST
+	/*Echo TEST
 	echo '<p>BUG id: '.$id.'</p>';
 	echo '<p>Stato: '.$stato.'</p>';
 	echo '<p>Data: '.$data_def.'</p>';
 	echo '<p>Priorita: '.$priorita.'</p>';
 	echo '<p>Gravita: '.$gravita.'</p>';
+	*/
  
  
 //-------------------------------------------------------------------------------
-/*
-        $fileContents= file_get_contents($url);
 
-		$fileContents = str_replace(array("\n", "\r", "\t"), '', $fileContents);
+// XML show bug URL
+$url='https://bugs.documentfoundation.org/show_bug.cgi?ctype=xml&id='.$id.'';
 
-		$fileContents = trim(str_replace('"', "'", $fileContents));
+$fileContents= file_get_contents($url);
+$fileContents = str_replace(array("\n", "\r", "\t"), '', $fileContents);
+$fileContents = trim(str_replace('"', "'", $fileContents));
 		
+$simpleXml = simplexml_load_string($fileContents);
+    
+// Remove 'attachment' node (big size!)
+unset($simpleXml->bug->attachment);
 
-		$simpleXml = simplexml_load_string($fileContents);
-    
-        unset($simpleXml->bug->attachment);
-    
+//Entro nel nodo <bug></bug>
+$bugnode = $simpleXml->bug;
 
-		$json = json_encode($simpleXml); //JSON_PRETTY_PRINT
+//Add new information to XML
+$bugnode->addChild('last_status', strip_tags(preg_replace('/\s+/', '', $stato)));       //Toglie tag html e toglie spazi vuoti
+$bugnode->addChild('first_priority', strip_tags(preg_replace('/\s+/', '', $priorita)));
+$bugnode->addChild('first_gravity', strip_tags(preg_replace('/\s+/', '', $gravita)));
+$bugnode->addChild('resolved_date', strip_tags(preg_replace('/\s+/', '', $data_def)));
+
+//echo $simpleXml->asXML();
+
     
-        $temp = json_decode($json);
-        $temp['bugs'][0]['bau'] = $stato;
-        $json = json_encode($temp);
+$json = json_encode($simpleXml, JSON_PRETTY_PRINT); //JSON_PRETTY_PRINT
     
-		header("Content-type: text/json");
-		print $json;
- */   
-    //$json = json_decode($json);
+//header("Content-type: text/json");
+//print $json;
+    
+$json = json_decode($json);
     
     
-/*    
 // memorizziamo nel database
     
         // select a database
@@ -188,7 +195,6 @@ for($x = 0; $x < $arrlength; $x++)
     
             $collection->insert($json);
            
-*/        
     
 }
 
