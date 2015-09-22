@@ -193,7 +193,7 @@ $json = json_decode($json);
            //seleziono la collection 
            $collection = $db->mongotesi;
     
-            $collection->insert($json);
+           $collection->insert($json);
            
     
 }
