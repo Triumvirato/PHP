@@ -22,7 +22,7 @@ foreach (getBugsFromCSV($csv) as $bug_number => $bug_title){
     }
 	
 	$conta++;
-    // eliminare if per poter memorizzare tutti i dati nel database
+    
 	if ($conta == 10)
 		break;
 	
