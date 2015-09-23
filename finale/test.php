@@ -23,7 +23,7 @@ foreach (getBugsFromCSV($csv) as $bug_number => $bug_title){
 	
 	$conta++;
     
-	if ($conta == 10)
+	if ($conta == 1)
 		break;
 	
 }
