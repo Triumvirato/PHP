@@ -1,0 +1,47 @@
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+body{
+    text-decoration: none;
+    text-align: center;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{
+    color: #3a3a3a;
+    font-weight: 100;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 25px;
+    text-align: left;
+}
+
+h3{
+    font-size: 15px;
+    text-align:center;
+    margin-top:30px;
+}
+
+h1{
+    text-align:left;
+    margin-top:30px;
+}
+
+.container.center{
+    margin-top: 5%;
+}
+
+.col.s12.foot{
+    margin-top: 5%;
+}
+
+.col.l6.m6.s12.op{
+    margin-top: 5%;
+}
+
+.modal{
+    margin-top: 100px;
+}
