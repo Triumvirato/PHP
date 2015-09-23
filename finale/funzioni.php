@@ -163,10 +163,10 @@ unset($simpleXml->bug->attachment);
 $bugnode = $simpleXml->bug;
 
 //Add new information to XML
-$bugnode->addChild('last_status', strip_tags(preg_replace('/\s+/', '', $stato)));       //Toglie tag html e toglie spazi vuoti
-$bugnode->addChild('first_priority', strip_tags(preg_replace('/\s+/', '', $priorita)));
-$bugnode->addChild('first_gravity', strip_tags(preg_replace('/\s+/', '', $gravita)));
-$bugnode->addChild('resolved_date', strip_tags(preg_replace('/\s+/', '', $data_def)));
+$bugnode->addChild('last_status', strip_tags(trim($stato)));       //Toglie tag html e toglie spazi vuoti
+$bugnode->addChild('first_priority', strip_tags(trim($priorita)));
+$bugnode->addChild('first_gravity', strip_tags(trim($gravita)));
+$bugnode->addChild('resolved_date', strip_tags(trim($data_def)));
 
 //echo $simpleXml->asXML();
 
