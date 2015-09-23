@@ -99,6 +99,9 @@ $es = $html->find('table tr td');
 
 $arrlength = count($es);
 
+//contatore per il numero delle ativita
+$nr_activities=0;
+    
 for($x = 0; $x < $arrlength; $x++) 
 {
     if(preg_match('/UTC/',$es[$x]) || preg_match('/PDT/',$es[$x]) || 
@@ -106,6 +109,7 @@ for($x = 0; $x < $arrlength; $x++)
 	preg_match('/EST/',$es[$x])){
 	
 		$ladata= $es[$x];
+        $nr_activities++;
     }
 	
     if(preg_match('/Status/',$es[$x])){
@@ -165,17 +169,18 @@ $bugnode = $simpleXml->bug;
 //Add new information to XML
 $bugnode->addChild('last_status', trim(strip_tags($stato)));       //Toglie tag html e toglie spazi vuoti
 $bugnode->addChild('first_priority', trim(strip_tags($priorita)));
-$bugnode->addChild('first_gravity', trim(strip_tags($gravita)));
+$bugnode->addChild('first_severity', trim(strip_tags($gravita)));
 $bugnode->addChild('resolved_date', trim(strip_tags($data_def)));
-
+$bugnode->addChild('nr_activities', trim(strip_tags($nr_activities)));
+    
 //echo $simpleXml->asXML();
 
     
 $json = json_encode($simpleXml, JSON_PRETTY_PRINT); //JSON_PRETTY_PRINT
     
-//header("Content-type: text/json");
-//print $json;
-    
+header("Content-type: text/json");
+var_dump($json);
+/*    
 $json = json_decode($json);
     
     
@@ -195,7 +200,7 @@ $json = json_decode($json);
     
             $collection->insert($json);
            
-    
+*/    
 }
 
 
