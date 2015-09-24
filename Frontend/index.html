@@ -25,28 +25,23 @@
             </div>
             <div class="col l6 m6 s12 op">
                 <h1>Select number of bugs:</h1>
-                 <div class="col 3">
-				 
-				  <div class="row">
+                <div class="col 3">
+                    <div class="row">
                         <input value="" id="numbugs" type="text" class="validate" placeholder="example 100">
                     </div>
-				 
-				 <br>
-				 
-				 <input name="group3" type="checkbox" value="allbugs" id="test3" />
-                 <label for="test3">SELECT ALL BUGS</label>
-
-                   
-                </div>
-               
-                        
-										
-                      
+                </div>                
+                <div class="col 3">
+                    <div class="row">
+                        <input name="group3" type="checkbox" value="allbugs" id="test3" />
+                        <label for="test3">SELECT ALL BUGS</label>
+                    </div>    
+                </div>    
+                
                 
             </div>
             <div class="col  l6 m6 s12 op">
                 <h1>Select bug status:</h1>
-                <div class="row">    
+                <div class="row">
                     <form action="#">
                         <p>
                             <input name="group2" type="radio" id="test1" />
@@ -56,13 +51,12 @@
                             <input name="group2" type="radio" id="test2" />
                             <label for="test2">CLOSED</label>
                         </p>
-                    </form>    
+                    </form>
                 </div>
             </div>
             <div class="col s12 foot">
                 <div class="row">
                     <a class="waves-effect waves-light btn modal-trigger" href="#modal1">SUBMIT</a>
-                    
                     <div id="modal1" class="modal">
                         <h1 style="text-align:center;margin-top:3%;">Loading..</h1>
                         <h3>L'operazione potrebbe durare alcuni minuti</h3>
@@ -71,10 +65,12 @@
                                 <div class="spinner-layer spinner-green-only">
                                     <div class="circle-clipper left">
                                         <div class="circle"></div>
-                                    </div><div class="gap-patch">
-                                    <div class="circle"></div>
-                                    </div><div class="circle-clipper right">
-                                    <div class="circle"></div>
+                                    </div>
+                                    <div class="gap-patch">
+                                        <div class="circle"></div>
+                                    </div>
+                                    <div class="circle-clipper right">
+                                        <div class="circle"></div>
                                     </div>
                                 </div>
                             </div>
@@ -84,42 +80,29 @@
             </div>
         </div>
     </div>
-
     <!--  Scripts-->
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="js/materialize.js"></script>
     <script src="js/init.js"></script>
-	
-	<script>
-
-$(document).ready(function(){
-    $('input[type="checkbox"]').click(function(){
-
-        if($(this).attr("value")=="allbugs"){
-            //alert('ciaociao');
-			$("#numbugs").toggle();	
-        }
-		
-    });
-});
-
- $('#project').on('change', function () {
-    if(this.value === "1"){	
-		alert('Mozilla');
-
-    } else if(this.value === "2"){
-
-		}
-		
-		
-		
-		
-    }
-});
-
-	
-	</script>
-	
+    <script>
+        $(document).ready(function () {
+            $('input[type="checkbox"]').click(function () {
+                if ($(this).attr("value") == "allbugs") {
+                    //alert('ciaociao');
+                    $("#numbugs").toggle();
+                }
+            });
+        });
+        $('#project').on('change', function () {
+            if (this.value === "1") {
+                alert('Mozilla');
+            } else if (this.value === "2") {
+                alert('Eclipse')
+            } else if (this.value === "3") {
+                alert('Libre Office')
+            }
+        });
+    </script>
 </body>
 
 </html>
