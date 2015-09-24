@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col s12">
                 <h1>Select Software Projects</h1>
-                <select>
+                <select id="project">
                     <option value="" disabled selected>Choose your option</option>
                     <option value="1">Mozilla</option>
                     <option value="2">Eclipse</option>
@@ -102,6 +102,21 @@ $(document).ready(function(){
 		
     });
 });
+
+ $('#project').on('change', function () {
+    if(this.value === "1"){	
+		alert('Mozilla');
+
+    } else if(this.value === "2"){
+
+		}
+		
+		
+		
+		
+    }
+});
+
 	
 	</script>
 	
