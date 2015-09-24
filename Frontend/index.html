@@ -25,20 +25,24 @@
             </div>
             <div class="col l6 m6 s12 op">
                 <h1>Select number of bugs:</h1>
-                <div class="col 3">
-                    <div class="row">
-                        <input value="" id="first_name2" type="text" class="validate" placeholder="example 100">
+                 <div class="col 3">
+				 
+				  <div class="row">
+                        <input value="" id="numbugs" type="text" class="validate" placeholder="example 100">
                     </div>
+				 
+				 <br>
+				 
+				 <input name="group3" type="checkbox" value="allbugs" id="test3" />
+                 <label for="test3">SELECT ALL BUGS</label>
+
+                   
                 </div>
-                <div class="col 3">
-                    <form action="#">
+               
                         
-                        <p>or  
-                            <input name="group3" type="radio" id="test3" />
-                            <label for="test3">SELECT ALL BUGS</label>
-                        </p>
-                    </form>
-                </div>
+										
+                      
+                
             </div>
             <div class="col  l6 m6 s12 op">
                 <h1>Select bug status:</h1>
@@ -85,6 +89,22 @@
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="js/materialize.js"></script>
     <script src="js/init.js"></script>
+	
+	<script>
+
+$(document).ready(function(){
+    $('input[type="checkbox"]').click(function(){
+
+        if($(this).attr("value")=="allbugs"){
+            //alert('ciaociao');
+			$("#numbugs").toggle();	
+        }
+		
+    });
+});
+	
+	</script>
+	
 </body>
 
 </html>
