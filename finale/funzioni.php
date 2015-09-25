@@ -178,29 +178,36 @@ $bugnode->addChild('nr_activities', trim(strip_tags($nr_activities)));
     
 $json = json_encode($simpleXml, JSON_PRETTY_PRINT); //JSON_PRETTY_PRINT
     
-header("Content-type: text/json");
-var_dump($json);
-/*    
+//header("Content-type: text/json");
+//var_dump($json);
+
 $json = json_decode($json);
     
     
 // memorizziamo nel database
     
-        // select a database
-        $db = $con->tesi_uniba;
+// select a database
+$db = $con->tesi_uniba;
    
-        if(!isset($collection))
-        {
-            //crea una collection
-           $collection = $db->createCollection("mongotesi");
-        }
+	if(!isset($collection)){
+	//crea una collection
+	$collection = $db->createCollection("mongotesi");
+	}
 
-           //seleziono la collection 
-           $collection = $db->mongotesi;
-    
-            $collection->insert($json);
-           
-*/    
+//seleziono la collection 
+$collection = $db->mongotesi;
+  
+try{  
+	$collection->insert($json);
+	
+	}
+	catch(MongoWriteConcernException $e){
+		
+		echo "error message: ".$e->getMessage()."\n";
+	}
+	
+	var_dump($db->lastError());           
+   
 }
 
 

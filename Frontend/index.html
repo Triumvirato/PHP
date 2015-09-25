@@ -44,11 +44,11 @@
                 <div class="row">
                     <form action="#">
                         <p>
-                            <input name="group2" type="radio" id="test1" />
+                            <input value="OPEN" name="bugstatus" type="radio" id="test1" />
                             <label for="test1">OPEN</label>
                         </p>
                         <p>
-                            <input name="group2" type="radio" id="test2" />
+                            <input value="CLOSED" name="bugstatus" type="radio" id="test2" />
                             <label for="test2">CLOSED</label>
                         </p>
                     </form>
@@ -56,7 +56,7 @@
             </div>
             <div class="col s12 foot">
                 <div class="row">
-                    <a class="waves-effect waves-light btn modal-trigger" href="#modal1">SUBMIT</a>
+                    <a id="submit1" class="waves-effect waves-light btn modal-trigger" href="#modal1">SUBMIT</a>
                     <div id="modal1" class="modal">
                         <h1 style="text-align:center;margin-top:3%;">Loading..</h1>
                         <h3>L'operazione potrebbe durare alcuni minuti</h3>
@@ -85,6 +85,8 @@
     <script src="js/materialize.js"></script>
     <script src="js/init.js"></script>
     <script>
+		
+		//Checkbox click
         $(document).ready(function () {
             $('input[type="checkbox"]').click(function () {
                 if ($(this).attr("value") == "allbugs") {
@@ -93,15 +95,37 @@
                 }
             });
         });
+		
+		//Select projects menu
         $('#project').on('change', function () {
             if (this.value === "1") {
-                alert('Mozilla');
+                urlsend = 'https://bugzilla.mozilla.org/buglist.cgi';
             } else if (this.value === "2") {
-                alert('Eclipse')
+                urlsend = 'https://bugs.eclipse.org/buglist.cgi';
             } else if (this.value === "3") {
-                alert('Libre Office')
+                urlsend = 'https://bugs.documentfoundation.org/buglist.cgi';
+				alert(urlsend);
             }
         });
+		
+		/*Select OPEN or CLOSED
+		$('.bugstatus').on('click', function () {
+            if (this.value === "OPEN") {
+                urlsend = urlsend + '?bug_status=OPEN';
+				alert(urlsend);
+            } else if (this.value === "CLOSED") {
+                urlsend = urlsend + '?bug_status=CLOSED';
+            }
+        });
+		*/
+		
+		//Submit button click
+		$("#submit1").click(function() {
+			if(typeof urlsend == "undefined")
+				alert('Error.');
+			else
+				alert(urlsend);
+		});
     </script>
 </body>
 
