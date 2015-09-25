@@ -1,0 +1,116 @@
+{
+    "bugs": [{
+        "priority": "--",
+        "cf_status_firefox_esr31": "---",
+        "assigned_to_detail": {
+            "email": "nobody@mozilla.org",
+            "real_name": "Nobody; OK to take it and work on it",
+            "name": "nobody@mozilla.org",
+            "id": 1
+        },
+        "blocks": [],
+        "creator": "zee@technocore.ru",
+        "last_change_time": "2015-08-01T18:39:34Z",
+        "cf_tracking_firefox_esr31": "---",
+        "is_cc_accessible": true,
+        "keywords": [],
+        "creator_detail": {
+            "email": "zee@technocore.ru",
+            "real_name": "Alexey Ermakov",
+            "name": "zee@technocore.ru",
+            "id": 299536
+        },
+        "cf_qa_whiteboard": "",
+        "cc": ["hjhoehlc@hotmail.com", "jackkeeley098@gmail.com", "khojames24@gmail.com", "sbadyals@gmail.com", "sullythomas@icloud.com", "vanthuane10cn_ptit92@hotmail.com", "yoloworkhard7@gmail.com", "zee@technocore.ru"],
+        "url": "",
+        "assigned_to": "nobody@mozilla.org",
+        "groups": [],
+        "see_also": [],
+        "cf_tracking_firefox41": "---",
+        "id": 415555,
+        "whiteboard": "",
+        "creation_time": "2008-02-04T16:57:14Z",
+        "qa_contact": "",
+        "depends_on": [],
+        "cf_tracking_firefox_esr38": "---",
+        "cf_status_firefox_esr38": "---",
+        "cf_rank": null,
+        "cf_tracking_firefox42": "---",
+        "mentors": [],
+        "dupe_of": null,
+        "cf_fx_iteration": "---",
+        "cf_tracking_firefox_relnote": "---",
+        "resolution": "",
+        "classification": "Client Software",
+        "alias": null,
+        "op_sys": "All",
+        "cf_last_resolved": null,
+        "cf_fx_points": "---",
+        "status": "UNCONFIRMED",
+        "cf_status_firefox41": "---",
+        "cf_tracking_firefox43": "---",
+        "cc_detail": [{
+            "email": "hjhoehlc@hotmail.com",
+            "real_name": "sldeoks",
+            "name": "hjhoehlc@hotmail.com",
+            "id": 494543
+        }, {
+            "email": "jackkeeley098@gmail.com",
+            "real_name": "",
+            "name": "jackkeeley098@gmail.com",
+            "id": 531693
+        }, {
+            "email": "khojames24@gmail.com",
+            "real_name": "",
+            "name": "khojames24@gmail.com",
+            "id": 533434
+        }, {
+            "email": "sbadyals@gmail.com",
+            "real_name": "",
+            "name": "sbadyals@gmail.com",
+            "id": 500677
+        }, {
+            "email": "sullythomas@icloud.com",
+            "real_name": "",
+            "name": "sullythomas@icloud.com",
+            "id": 545566
+        }, {
+            "email": "vanthuane10cn_ptit92@hotmail.com",
+            "real_name": "",
+            "name": "vanthuane10cn_ptit92@hotmail.com",
+            "id": 508227
+        }, {
+            "email": "yoloworkhard7@gmail.com",
+            "real_name": "Roshan",
+            "name": "yoloworkhard7@gmail.com",
+            "id": 515252
+        }, {
+            "email": "zee@technocore.ru",
+            "real_name": "Alexey Ermakov",
+            "name": "zee@technocore.ru",
+            "id": 299536
+        }],
+        "cf_crash_signature": "",
+        "summary": "Feature request: option to AND queries submitted to nsINavHistoryService.executeQueries()",
+        "cf_tracking_win": "---",
+        "cf_status_firefox42": "---",
+        "cf_user_story": "",
+        "is_open": true,
+        "platform": "All",
+        "severity": "enhancement",
+        "cf_status_firefox43": "---",
+        "votes": 0,
+        "cf_status_firefox40": "---",
+        "flags": [],
+        "version": "unspecified",
+        "cf_tracking_e10s": "---",
+        "cf_tracking_p11": "---",
+        "mentors_detail": [],
+        "component": "Bookmarks & History",
+        "is_creator_accessible": true,
+        "product": "Firefox",
+        "is_confirmed": false,
+        "target_milestone": "---",
+        "cf_tracking_firefox40": "---"
+    }]
+}

@@ -1,0 +1,61 @@
+{
+   "bugs" : {
+      "415555" : {
+         "comments" : [
+            {
+               "attachment_id" : null,
+               "author" : "zee@technocore.ru",
+               "bug_id" : 415555,
+               "creation_time" : "2008-02-04T16:57:14Z",
+               "creator" : "zee@technocore.ru",
+               "id" : 3466830,
+               "is_private" : false,
+               "raw_text" : "User-Agent:       Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-US) AppleWebKit/523 (KHTML, like Gecko, Safari/523.10) OmniWeb/v615.0.97232\nBuild Identifier: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en_US; rv:1.9b2) Gecko/2007121014 Firefox/3.0b2\n\nI was trying to find out if I can implement OmniWeb-style address bar search (e.g. typing \"foo bar\" into address bar produces pages which have both \"foo\" and \"bar\" in their address/title, not pages which have \"foo bar\" in their metadata) and if I understand correctly, I can't do that without resorting to manual filtering of search results in js-land. An option to have the queries submitted to nsINavHistoryService.executeQueries() would help to resolve this problem.\n\nReproducible: Always",
+               "tags" : [],
+               "text" : "User-Agent:       Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-US) AppleWebKit/523 (KHTML, like Gecko, Safari/523.10) OmniWeb/v615.0.97232\nBuild Identifier: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en_US; rv:1.9b2) Gecko/2007121014 Firefox/3.0b2\n\nI was trying to find out if I can implement OmniWeb-style address bar search (e.g. typing \"foo bar\" into address bar produces pages which have both \"foo\" and \"bar\" in their address/title, not pages which have \"foo bar\" in their metadata) and if I understand correctly, I can't do that without resorting to manual filtering of search results in js-land. An option to have the queries submitted to nsINavHistoryService.executeQueries() would help to resolve this problem.\n\nReproducible: Always",
+               "time" : "2008-02-04T16:57:14Z"
+            },
+            {
+               "attachment_id" : null,
+               "author" : "zee@technocore.ru",
+               "bug_id" : 415555,
+               "creation_time" : "2008-02-04T16:58:03Z",
+               "creator" : "zee@technocore.ru",
+               "id" : 3466833,
+               "is_private" : false,
+               "raw_text" : "The last line should read as \"An option to have the queries submitted to nsINavHistoryService.executeQueries() ANDed instead of ORed\", sorry.",
+               "tags" : [],
+               "text" : "The last line should read as \"An option to have the queries submitted to nsINavHistoryService.executeQueries() ANDed instead of ORed\", sorry.",
+               "time" : "2008-02-04T16:58:03Z"
+            },
+            {
+               "attachment_id" : null,
+               "author" : "gerv@mozilla.org",
+               "bug_id" : 415555,
+               "creation_time" : "2009-11-26T14:11:42Z",
+               "creator" : "gerv@mozilla.org",
+               "id" : 4421486,
+               "is_private" : false,
+               "raw_text" : "Bug 451915 - move Firefox/Places bugs to Firefox/Bookmarks and History. Remove all bugspam from this move by filtering for the string \"places-to-b-and-h\".\n\nIn Thunderbird 3.0b, you do that as follows:\nTools | Message Filters\nMake sure the correct account is selected. Click \"New\"\nConditions: Body   contains   places-to-b-and-h\nChange the action to \"Delete Message\".\nSelect \"Manually Run\" from the dropdown at the top.\nClick OK.\n\nSelect the filter in the list, make sure \"Inbox\" is selected at the bottom, and click \"Run Now\". This should delete all the bugspam. You can then delete the filter.\n\nGerv",
+               "tags" : [],
+               "text" : "Bug 451915 - move Firefox/Places bugs to Firefox/Bookmarks and History. Remove all bugspam from this move by filtering for the string \"places-to-b-and-h\".\n\nIn Thunderbird 3.0b, you do that as follows:\nTools | Message Filters\nMake sure the correct account is selected. Click \"New\"\nConditions: Body   contains   places-to-b-and-h\nChange the action to \"Delete Message\".\nSelect \"Manually Run\" from the dropdown at the top.\nClick OK.\n\nSelect the filter in the list, make sure \"Inbox\" is selected at the bottom, and click \"Run Now\". This should delete all the bugspam. You can then delete the filter.\n\nGerv",
+               "time" : "2009-11-26T14:11:42Z"
+            },
+            {
+               "attachment_id" : null,
+               "author" : "hjhoehlc@hotmail.com",
+               "bug_id" : 415555,
+               "creation_time" : "2014-01-02T03:58:38Z",
+               "creator" : "hjhoehlc@hotmail.com",
+               "id" : 8247228,
+               "is_private" : false,
+               "raw_text" : "When I use the Firefox browser to access http://www.dpsgold.com, will encounter this problem",
+               "tags" : [],
+               "text" : "When I use the Firefox browser to access http://www.dpsgold.com, will encounter this problem",
+               "time" : "2014-01-02T03:58:38Z"
+            }
+         ]
+      }
+   },
+   "comments" : {}
+}
