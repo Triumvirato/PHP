@@ -86,15 +86,17 @@
     <script src="js/init.js"></script>
     <script>
 		
-		//Checkbox click
-        $(document).ready(function () {
-            $('input[type="checkbox"]').click(function () {
-                if ($(this).attr("value") == "allbugs") {
-                    //alert('ciaociao');
-                    $("#numbugs").toggle();
-                }
-            });
+
+    $(document).ready(function () {
+
+        //Checkbox click
+        $('input[type="checkbox"]').click(function () {
+            if ($(this).attr("value") == "allbugs") {
+            //alert('ciaociao');
+            $("#numbugs").toggle();
+            }
         });
+        
 		
 		//Select projects menu
         $('#project').on('change', function () {
@@ -108,16 +110,17 @@
             }
         });
 		
-		/*Select OPEN or CLOSED
-		$('.bugstatus').on('click', function () {
+		//Select OPEN or CLOSED
+		$("input[name='bugstatus']").change(function(){
+
             if (this.value === "OPEN") {
                 urlsend = urlsend + '?bug_status=OPEN';
-				alert(urlsend);
+				
             } else if (this.value === "CLOSED") {
                 urlsend = urlsend + '?bug_status=CLOSED';
+                
             }
         });
-		*/
 		
 		//Submit button click
 		$("#submit1").click(function() {
@@ -126,7 +129,11 @@
 			else
 				alert(urlsend);
 		});
+
+    });    
+
     </script>
+
 </body>
 
 </html>
