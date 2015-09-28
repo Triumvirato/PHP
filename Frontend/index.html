@@ -60,6 +60,9 @@
                     <div id="modal1" class="modal">
                         <h1 style="text-align:center;margin-top:3%;">Loading..</h1>
                         <h3>L'operazione potrebbe durare alcuni minuti</h3>
+                        
+                        <div id="result"> </div>
+                        
                         <div class="modal-content">
                             <div class="preloader-wrapper big active">
                                 <div class="spinner-layer spinner-green-only">
@@ -126,9 +129,27 @@
 		$("#submit1").click(function() {
 			if(typeof urlsend == "undefined")
 				alert('Error.');
-			else
-				alert(urlsend);
-		});
+        
+        //Ajax
+
+        $.ajax({
+            url: 'result.php',
+            type: "POST",
+            data: "urlsend="+urlsend,
+            success: function(data) {
+            $("div#result").html(data);
+            }
+                
+            });
+            
+        return false;
+        
+        }); 
+
+        //End Ajax
+        
+
+
 
     });    
 
