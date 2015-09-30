@@ -23,14 +23,13 @@ foreach (getBugsFromCSV($csv) as $bug_number => $bug_title){
 	
 	$conta++;
 
-	if ($conta == 5){
-
-    break;
-	}
-		
+	//if ($conta == 5)
+	//	break;
 	
 }
 
-
+ echo '<p>FINE. Prelevati: '.$conta.'</p>';
+ flush();
+ ob_flush();
 
 ?>
