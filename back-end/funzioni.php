@@ -209,7 +209,7 @@ try{
 
     }
 
-    echo '<p>Fine inserimento</p>';
+    
 
     flush();
     ob_flush();
