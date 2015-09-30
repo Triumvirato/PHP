@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+    <title>Tesi</title>
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+</head>
+
+<body>
+    <div class="container center">
+        <div class="row">
+            <div class="col s12">
+                <h1>Select Software Projects</h1>
+                <select required id="project">
+                    <option value="" disabled selected>Choose your option</option>
+                <!-- <option value="1">Mozilla</option> -->
+                <!-- <option value="2">Eclipse</option> -->
+                    <option value="3">Libre Office</option>
+                </select>
+            </div>
+            <div class="col l6 m6 s12 op">
+                <h1>Select number of bugs:</h1>
+                <div class="col 3">
+                    <div class="row">
+                        <input value="" id="numbugs" type="text" class="validate" placeholder="example 100">
+                    </div>
+                </div>                
+                <div class="col 3">
+                    <div class="row">
+                        <input name="group3" type="checkbox" value="allbugs" id="test3" />
+                        <label for="test3">SELECT ALL BUGS</label>
+                    </div>    
+                </div>    
+                
+                
+            </div>
+            <div class="col  l6 m6 s12 op">
+                <h1>Select bug status:</h1>
+                <div class="row">
+                    <form action="#">
+                        <p>
+                            <input value="OPEN" name="bugstatus" type="radio" id="test1" />
+                            <label for="test1">OPEN</label>
+                        </p>
+                        <p>
+                            <input value="CLOSED" name="bugstatus" type="radio" id="test2" />
+                            <label for="test2">CLOSED</label>
+                        </p>
+                    </form>
+                </div>
+            </div>
+            <div class="col s12 foot">
+                <div class="row">
+                    <a id="submit1" class="waves-effect waves-light btn modal-trigger" href="#modal1">SUBMIT</a>
+                    <div id="modal1" class="modal">
+                        <h1 style="text-align:center;margin-top:3%;">Loading..</h1>
+                        <h3>L'operazione potrebbe durare alcuni minuti</h3>
+                        
+                        <div id="progress"> </div>
+                        
+                        <div class="modal-content">
+                            <div class="preloader-wrapper big active">
+                                <div class="spinner-layer spinner-green-only">
+                                    <div class="circle-clipper left">
+                                        <div class="circle" style="width=300px"></div>
+                                    </div>
+                                    <div class="gap-patch">
+                                        <div class="circle"></div>
+                                    </div>
+                                    <div class="circle-clipper right">
+                                        <div class="circle"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="js/materialize.js"></script>
+    <script src="js/init.js"></script>
+    <script>
+        
+
+    $(document).ready(function () {
+
+        //Checkbox click
+        $('input[type="checkbox"]').click(function () {
+            if ($(this).attr("value") == "allbugs") {
+            //alert('ciaociao');
+            $("#numbugs").toggle();
+            }
+        });
+        
+        
+        //Select projects menu
+        $('#project').on('change', function () {
+            if (this.value === "1") {
+                urlsend = 'https://bugzilla.mozilla.org/buglist.cgi';
+            } else if (this.value === "2") {
+                urlsend = 'https://bugs.eclipse.org/buglist.cgi';
+            } else if (this.value === "3") {
+                urlsend = 'https://bugs.documentfoundation.org/buglist.cgi';
+                //alert(urlsend);
+            }
+        });
+        
+        //Select OPEN or CLOSED
+        $("input[name='bugstatus']").change(function(){
+
+            if (this.value === "OPEN") {
+                urlsend = urlsend + '?bug_status=OPEN';
+                
+            } else if (this.value === "CLOSED") {
+                urlsend = urlsend + '?bug_status=CLOSED';
+                
+            }
+        });
+        
+        //Submit button click
+        $("#submit1").click(function() {
+            if(typeof urlsend == "undefined")
+                alert('Error.');
+        
+        //Ajax
+
+        $.ajax({
+             xhr: 
+             function() {
+
+                    var xhr = new window.XMLHttpRequest();
+                    xhr.addEventListener("progress", function(e){
+                        console.log(e.currentTarget.response); //LOG
+                        $("#progress").html(e.currentTarget.response);
+                    });
+                return xhr;
+            },
+
+            url: '../back-end/test.php',
+            type: "POST",
+            data: "urlsend="+urlsend,
+ 
+            });
+            
+        return false;
+        
+        }); 
+
+        //End Ajax
+    });    
+
+    </script>
+
+</body>
+
+</html>
