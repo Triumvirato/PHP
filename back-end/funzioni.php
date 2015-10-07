@@ -74,8 +74,9 @@ function cacheUrl($url, $time = 120)
 function connectToMongo()
 {
     // connect to mongodb
-   $con = new MongoClient( "mongodb://tesi:tesi@ds059712.mongolab.com:59712/tesi_uniba" );
-   
+   //$con = new MongoClient( "mongodb://tesi:tesi@ds059712.mongolab.com:59712/tesi_uniba" );
+    $con = new MongoClient( "mongodb://188.166.121.194:27017/tesi_uniba" );
+
    //Debug
    //echo "Connection to database successfully";
     
@@ -182,10 +183,21 @@ if(isset($data_def))
     $bugnode->addChild('resolved_date', trim(strip_tags($data_def)));
     
 $bugnode->addChild('nr_activities', trim(strip_tags($nr_activities)));
+
+//aggiungiamo i giorni di risoluzione
+
+$data_start = $bugnode->creation_ts;
+$data_def = trim(strip_tags($data_def));
+    
+$interval = date_diff(date_create($data_start), date_create($data_def));
+$giorni = $interval->format('%a');
+
+$bugnode->addChild('days_resolution', $giorni);
+    
     
 //echo $simpleXml->asXML();
 
-    
+  
 $json = json_encode($simpleXml, JSON_PRETTY_PRINT); //JSON_PRETTY_PRINT
     
 //header("Content-type: text/json");
