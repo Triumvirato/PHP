@@ -71,40 +71,54 @@ function cacheUrl($url, $time = 120)
 }
 
 
+/*
+ * connectToMongo()
+ * Connect to mongodb and return the connection
+ *
+ * @return $con
+ */
+
 function connectToMongo()
 {
-    // connect to mongodb
-   //$con = new MongoClient( "mongodb://tesi:tesi@ds059712.mongolab.com:59712/tesi_uniba" );
-    $con = new MongoClient( "mongodb://188.166.121.194:27017/tesi_uniba" );
+    //Remote host
+    //$con = new MongoClient( "mongodb://188.166.121.194:27017/tesi_uniba" );
 
-   //Debug
-   //echo "Connection to database successfully";
+    //localhost
+    $con = new MongoClient( "mongodb://127.0.0.1/tesi_uniba" );
     
-    return $con;
-   
+    return $con;  
 }
 
 
+/*
+ * getBugs()
+ * Get bugs and save them on db
+ *
+ * @var $id, id of the bugzilla bug
+ * @var $con, db connection
+ */
 
 function getBugs($id,$con)
 {
  
-// Include the library to use it.
+// Include the library for scraping
 include_once('simple_html_dom.php');
 
 // Start History Scraping 
 $html = file_get_html('https://bugs.documentfoundation.org/show_activity.cgi?id='.$id.'');
 
-//Search the table (muhahahahah)    
+//Search the table that contains data  
 $es = $html->find('table tr td');
 
 $arrlength = count($es);
 
-//contatore per il numero delle ativita
+//Count number of activity
 $nr_activities=0;
     
+//Keep data from History page
 for($x = 0; $x < $arrlength; $x++) 
 {
+    //Keep date and time
     if(preg_match('/UTC/',$es[$x]) || preg_match('/PDT/',$es[$x]) || 
     preg_match('/DST/',$es[$x]) || preg_match('/PST/',$es[$x]) || 
     preg_match('/EST/',$es[$x])){
@@ -113,6 +127,7 @@ for($x = 0; $x < $arrlength; $x++)
         $nr_activities++;
     }
     
+    //Keep bug status
     if(preg_match('/Status/',$es[$x])){
         
         if(preg_match('/RESOLVED/',$es[$x+2])){
@@ -122,6 +137,7 @@ for($x = 0; $x < $arrlength; $x++)
         }       
     }  
     
+    //Keep bug priority
     if(preg_match('/Priority/',$es[$x])){
         
         if(!isset($priorita)){
@@ -129,6 +145,7 @@ for($x = 0; $x < $arrlength; $x++)
             }
     }
     
+    //Keep bug severity
     if(preg_match('/Severity/',$es[$x]))
     {
         if(!isset($gravita)){
@@ -136,9 +153,6 @@ for($x = 0; $x < $arrlength; $x++)
         }
     }
 
-    
-    //Echo TEST
-    //echo $es[$x];
 }
 
     /*Echo TEST
@@ -150,9 +164,10 @@ for($x = 0; $x < $arrlength; $x++)
     */
  
  
-//-------------------------------------------------------------------------------
+//-------------------------------------------
 
-// XML show bug URL
+
+// XML bug URL
 $url='https://bugs.documentfoundation.org/show_bug.cgi?ctype=xml&id='.$id.'';
 
 $fileContents= file_get_contents($url);
@@ -164,11 +179,10 @@ $simpleXml = simplexml_load_string($fileContents);
 // Remove 'attachment' node (big size!)
 unset($simpleXml->bug->attachment);
 
-//Entro nel nodo <bug></bug>
+//Enter in the node <bug></bug>
 $bugnode = $simpleXml->bug;
 
-//Add new information to XML
-//$bugnode->addChild('last_status', trim(strip_tags($stato)));       //Toglie tag html e toglie spazi vuoti
+//Add new information (previus data) to XML
 if(isset($priorita))
     $bugnode->addChild('first_priority', trim(strip_tags($priorita)));
 else
@@ -184,8 +198,8 @@ if(isset($data_def))
     
 $bugnode->addChild('nr_activities', trim(strip_tags($nr_activities)));
 
-//aggiungiamo i giorni di risoluzione
 
+//aggiungiamo i giorni di risoluzione
 $data_start = $bugnode->creation_ts;
 $data_def = trim(strip_tags($data_def));
     
@@ -194,20 +208,21 @@ $giorni = $interval->format('%a');
 
 $bugnode->addChild('days_resolution', $giorni);
     
-    
+//Debug    
 //echo $simpleXml->asXML();
 
-  
+//XML to json conversion
 $json = json_encode($simpleXml, JSON_PRETTY_PRINT); //JSON_PRETTY_PRINT
-    
+
+//Debug
 //header("Content-type: text/json");
 //var_dump($json);
 
 $json = json_decode($json);
     
     
-// memorizziamo nel database
-    
+//------------ Save data on DB -------------
+
 // select a database
 $db = $con->tesi_uniba;
    
@@ -216,15 +231,16 @@ $db = $con->tesi_uniba;
     $collection = $db->createCollection("mongotesi");
     }
 
-//seleziono la collection 
+//Select collection
 $collection = $db->mongotesi;
   
+
 try{  
     $collection->insert($json);
-
-    echo '<p>Inserito</p>';
     
+    echo '<p>Inserito</p>';
     }
+    
     catch(MongoWriteConcernException $e){
         
         echo "error message: ".$e->getMessage()."\n";
@@ -232,15 +248,8 @@ try{
     }
 
     
-
     flush();
-    ob_flush();
-    
-    //var_dump($db->lastError());           
-   
+    ob_flush();          
 }
 
-
 ?>
-
-
