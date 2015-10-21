@@ -41,7 +41,7 @@
              -->
 
             </div>
-            
+
             <div class="col  l6 m6 s12 op">
                 <h1>Select bug status:</h1>
                 <div class="row">
@@ -107,25 +107,30 @@
         //Select projects menu
         $('#project').on('change', function () {
             if (this.value === "1") {
-                urlsend = 'https://bugzilla.mozilla.org/buglist.cgi';
+                url = 'https://bugzilla.mozilla.org/buglist.cgi';
             } else if (this.value === "2") {
-                urlsend = 'https://bugs.eclipse.org/buglist.cgi';
+                url = 'https://bugs.eclipse.org/buglist.cgi';
             } else if (this.value === "3") {
-                urlsend = 'https://bugs.documentfoundation.org/buglist.cgi';
-                //alert(urlsend);
+                url = 'https://bugs.documentfoundation.org/buglist.cgi';
             }
+
+            console.log(url);
+
         });
         
         //Select OPEN or CLOSED
         $("input[name='bugstatus']").change(function(){
 
             if (this.value === "OPEN") {
-                urlsend = urlsend + '?bug_status=OPEN';
+                urlsend = url + '?bug_status=OPEN';
                 
             } else if (this.value === "CLOSED") {
-                urlsend = urlsend + '?bug_status=CLOSED';
+                urlsend = url + '?bug_status=CLOSED';
                 
             }
+
+            console.log('urlsend: ' + urlsend);
+
         });
         
         //Submit button click
