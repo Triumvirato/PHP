@@ -25,20 +25,21 @@
             </div>
             <div class="col l6 m6 s12 op">
             
-            <!--    
-                <h1>Select number of bugs:</h1>
+                
+                <h1>Select collection:</h1>
                 <div class="col 3">
                     <div class="row">
-                        <input value="" id="numbugs" type="text" class="validate" placeholder="example 100">
+                        <input value="mongotesi" id="collname" type="text" class="validate">
                     </div>
                 </div>                
+                <!--
                 <div class="col 3">
                     <div class="row">
                         <input name="group3" type="checkbox" value="allbugs" id="test3" />
                         <label for="test3">SELECT ALL BUGS</label>
                     </div>    
                 </div>    
-             -->
+                -->
 
             </div>
 
@@ -132,14 +133,21 @@
             console.log('urlsend: ' + urlsend);
 
         });
-        
+
+
+        //Select collection name
+        $('#collname').on('input', function() {
+            collname = $("#collname").val();
+            console.log('collection name: ' + collname);
+
+        });
+
         //Submit button click
         $("#submit1").click(function() {
             if(typeof urlsend == "undefined")
                 alert('Error.');
         
         //Ajax
-
         $.ajax({
              xhr: 
              function() {
@@ -154,10 +162,10 @@
 
             url: '../back-end/test.php',
             type: "POST",
-            data: "urlsend="+urlsend,
+            data: "urlsend="+urlsend+"&collname="+collname,
  
             });
-            
+
         return false;
         
         }); 

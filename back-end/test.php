@@ -14,10 +14,17 @@ $csv = cacheUrl($bugzilla_query . '&ctype=csv');
 // count bug(s)
 $conta=0;
 
+//Recive name of collection from front-end
+$collname = $_POST['collname'];
+
+//Debug
+echo '<p>Collection: '.$collname.'</p>';
+
+
 foreach (getBugsFromCSV($csv) as $bug_number => $bug_title){
 
     if (!empty($bug_number)) { 
-        getBugs($bug_number, $con);     
+        getBugs($bug_number, $con, $collname);     
     }
 	
 	$conta++;
@@ -27,8 +34,9 @@ foreach (getBugsFromCSV($csv) as $bug_number => $bug_title){
 	//break;
 }
 
+
 // Print the results on front-end
- echo '<p>FINE. Prelevati: '.$conta.'</p>';
+ echo '<p>FINE. Prelevati: '.$conta.' bug(s)</p>';
  flush();
  ob_flush();
 

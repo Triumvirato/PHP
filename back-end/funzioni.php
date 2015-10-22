@@ -81,10 +81,10 @@ function cacheUrl($url, $time = 120)
 function connectToMongo()
 {
     //Remote host
-    //$con = new MongoClient( "mongodb://188.166.121.194:27017/tesi_uniba" );
+    $con = new MongoClient( "mongodb://188.166.121.194:27017/tesi_uniba" );
 
     //localhost
-    $con = new MongoClient( "mongodb://127.0.0.1/tesi_uniba" );
+    //$con = new MongoClient( "mongodb://127.0.0.1/tesi_uniba" );
     
     return $con;  
 }
@@ -98,7 +98,7 @@ function connectToMongo()
  * @var $con, db connection
  */
 
-function getBugs($id,$con)
+function getBugs($id,$con,$collname)
 {
  
 // Include the library for scraping
@@ -225,24 +225,27 @@ $json = json_decode($json);
 
 // select a database
 $db = $con->tesi_uniba;
+
+//$collname = "provacoll";
    
     if(!isset($collection)){
     //crea una collection
-    $collection = $db->createCollection("mongotesi");
+    $collection = $db->createCollection($collname);
     }
 
 //Select collection
-$collection = $db->mongotesi;
+$collection = $db->$collname;
   
 
 try{  
     $collection->insert($json);
     
-    echo '<p>Inserito</p>';
+    echo '<p>Bug: '.$id.' inserted</p>';
     }
     
     catch(MongoWriteConcernException $e){
         
+        echo 'Database error';
         echo "error message: ".$e->getMessage()."\n";
 
     }
