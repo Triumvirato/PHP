@@ -9,7 +9,7 @@ $con=connectToMongo();
 $bugzilla_query = $_POST['urlsend'];
 
 // cache in a local cache folder if possible
-$csv = cacheUrl($bugzilla_query . '&ctype=csv');
+$csv = cacheUrl($bugzilla_query . '/buglist.cgi?bug_status=CLOSED&ctype=csv'); //CSV dei bug closed
 
 // count bug(s)
 $conta=0;
@@ -17,14 +17,10 @@ $conta=0;
 //Recive name of collection from front-end
 $collname = $_POST['collname'];
 
-//Debug
-echo '<p>Collection: '.$collname.'</p>';
-
-
 foreach (getBugsFromCSV($csv) as $bug_number => $bug_title){
 
     if (!empty($bug_number)) { 
-        getBugs($bug_number, $con, $collname);     
+        getBugs($bug_number, $con, $collname, $bugzilla_query);     
     }
 	
 	$conta++;
@@ -36,7 +32,8 @@ foreach (getBugsFromCSV($csv) as $bug_number => $bug_title){
 
 
 // Print the results on front-end
- echo '<p>FINE. Prelevati: '.$conta.' bug(s)</p>';
+echo 'Prelevati: ' . $conta;
+
  flush();
  ob_flush();
 

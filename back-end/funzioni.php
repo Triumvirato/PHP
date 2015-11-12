@@ -98,14 +98,17 @@ function connectToMongo()
  * @var $con, db connection
  */
 
-function getBugs($id,$con,$collname)
+function getBugs($id,$con,$collname,$bugzilla_query)
 {
  
 // Include the library for scraping
 include_once('simple_html_dom.php');
 
+//Compongo l'url della history
+$history_url = $bugzilla_query . '/show_activity.cgi?id='.$id.'';
+
 // Start History Scraping 
-$html = file_get_html('https://bugs.documentfoundation.org/show_activity.cgi?id='.$id.'');
+$html = file_get_html($history_url);
 
 //Search the table that contains data  
 $es = $html->find('table tr td');
@@ -119,10 +122,15 @@ $nr_activities=0;
 for($x = 0; $x < $arrlength; $x++) 
 {
     //Keep date and time
-    if(preg_match('/UTC/',$es[$x]) || preg_match('/PDT/',$es[$x]) || 
-    preg_match('/DST/',$es[$x]) || preg_match('/PST/',$es[$x]) || 
-    preg_match('/EST/',$es[$x])){
-    
+    if(
+        preg_match('/UTC/',$es[$x]) || 
+        preg_match('/PDT/',$es[$x]) || 
+        preg_match('/DST/',$es[$x]) || 
+        preg_match('/PST/',$es[$x]) || 
+        preg_match('/EST/',$es[$x]) || 
+        preg_match('/EDT/',$es[$x])
+        ){ 
+
         $ladata= $es[$x];
         $nr_activities++;
     }
@@ -167,8 +175,10 @@ for($x = 0; $x < $arrlength; $x++)
 //-------------------------------------------
 
 
-// XML bug URL
-$url='https://bugs.documentfoundation.org/show_bug.cgi?ctype=xml&id='.$id.'';
+
+
+// compongo l'url per aprire i dati del bug in formato XML
+$url = $bugzilla_query . '/show_bug.cgi?ctype=xml&id='.$id.'';
 
 $fileContents= file_get_contents($url);
 $fileContents = str_replace(array("\n", "\r", "\t"), '', $fileContents);
@@ -182,16 +192,20 @@ unset($simpleXml->bug->attachment);
 //Enter in the node <bug></bug>
 $bugnode = $simpleXml->bug;
 
+//From xml
+$xmlseverity = $bugnode->bug_severity;
+$xmlpriority = $bugnode->priority;
+
 //Add new information (previus data) to XML
 if(isset($priorita))
     $bugnode->addChild('first_priority', trim(strip_tags($priorita)));
 else
-    $bugnode->addChild('first_priority', '');
+    $bugnode->addChild('first_priority', $xmlpriority);
     
 if(isset($gravita))
     $bugnode->addChild('first_severity', trim(strip_tags($gravita)));
 else
-    $bugnode->addChild('first_severity', '');
+    $bugnode->addChild('first_severity', $xmlseverity);
 
 if(isset($data_def))    
     $bugnode->addChild('resolved_date', trim(strip_tags($data_def)));
