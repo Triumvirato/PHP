@@ -117,7 +117,10 @@ $arrlength = count($es);
 
 //Count number of activity
 $nr_activities=0;
-    
+
+$trovato = 0;
+$duplicato = 0;  
+
 //Keep data from History page
 for($x = 0; $x < $arrlength; $x++) 
 {
@@ -142,8 +145,20 @@ for($x = 0; $x < $arrlength; $x++)
         
             $stato= $es[$x+2];
             $data_def=$ladata;
-        }       
+
+            $trovato = 1;
+        }
     }  
+
+    //Cerca duplicati
+    if(preg_match('/Resolution/',$es[$x])){
+        
+        if(preg_match('/DUPLICATE/',$es[$x+2])){
+
+            $duplicato = 1;
+        }
+    }  
+
     
     //Keep bug priority
     if(preg_match('/Priority/',$es[$x])){
@@ -162,6 +177,10 @@ for($x = 0; $x < $arrlength; $x++)
     }
 
 }
+
+
+
+if($trovato == 1 || $duplicato == 1){  
 
     /*Echo TEST
     echo '<p>BUG id: '.$id.'</p>';
@@ -266,7 +285,10 @@ try{
 
     
     flush();
-    ob_flush();          
+    ob_flush(); 
+
+}//chiusura if
+
 }
 
 ?>
