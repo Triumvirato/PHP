@@ -180,7 +180,7 @@ for($x = 0; $x < $arrlength; $x++)
 
 
 
-if($trovato == 1 || $duplicato != 1){  
+if($trovato == 1 && $duplicato != 1){  
 
     /*Echo TEST
     echo '<p>BUG id: '.$id.'</p>';
