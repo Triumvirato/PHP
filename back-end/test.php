@@ -9,7 +9,7 @@ $con=connectToMongo();
 $bugzilla_query = $_POST['urlsend'];
 
 // cache in a local cache folder if possible
-$csv = cacheUrl($bugzilla_query . '/buglist.cgi?bug_status=CLOSED&ctype=csv'); //CSV dei bug closed
+$csv = cacheUrl($bugzilla_query . '/buglist.cgi?bug_status=CLOSED&resolution=FIXED&ctype=csv'); //CSV dei bug closed
 
 // count bug(s)
 $conta=0;

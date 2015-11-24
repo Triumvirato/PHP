@@ -120,7 +120,6 @@ $nr_activities=0;
 
 //azzera i flag di controllo
 $risolto = 0; 
-$fixato = 0;
 $duplicato = 0; 
 
 
@@ -160,11 +159,6 @@ for($x = 0; $x < $arrlength; $x++)
 
             $duplicato = 1;
         }
-
-        if(preg_match('/FIXED/',$es[$x+2])){
-
-            $fixato = 1;
-        }
     }  
 
     
@@ -188,7 +182,7 @@ for($x = 0; $x < $arrlength; $x++)
 
 
 
-if($risolto == 1 && $fixato == 1 && $duplicato != 1){  
+if($risolto == 1 && $duplicato != 1){  
 
     /*Echo TEST
     echo '<p>BUG id: '.$id.'</p>';
